@@ -5,11 +5,12 @@ import com.cotranche.l0raxeo.trancheManager.app.UniLauncher;
 import java.awt.*;
 import java.io.Console;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class WinLauncher
 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
         Console console = System.console();
         if(console == null && !GraphicsEnvironment.isHeadless()){
             String filename = UniLauncher.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
