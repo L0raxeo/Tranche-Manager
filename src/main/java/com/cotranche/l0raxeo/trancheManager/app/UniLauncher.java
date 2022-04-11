@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class TMLauncher
+public class UniLauncher
 {
 
     public static void init() throws IOException
