@@ -1,15 +1,19 @@
 package com.cotranche.l0raxeo.trancheManager.app;
 import com.cotranche.l0raxeo.trancheManager.app.tranches.StockSpreads;
 import com.cotranche.l0raxeo.trancheManager.utils.CSVLoader;
+import com.cotranche.l0raxeo.trancheManager.utils.FileLoader;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
-public class Launcher
+public class TMLauncher
 {
 
-    public static void init()
+    public static void init() throws IOException
     {
+        FileLoader.createDir("bin/output/spreads");
+
         CSVLoader csvLoader = new CSVLoader();
 
         // your directory
@@ -20,7 +24,7 @@ public class Launcher
         }
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
         System.out.println("preparing program...");
         init();

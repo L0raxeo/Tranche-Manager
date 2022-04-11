@@ -41,8 +41,9 @@ public class StockSpreads
 
     public static void createSpread(String spreadName)
     {
+        // add expense ratio and dividend yield
         List<String[]> spreadRow = new ArrayList<>();
-        spreadRow.add(new String[] {"PPS", "CAGR", "1 Year Return", "5 Year Return"});
+        spreadRow.add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return"});
 
         spreads.put(spreadName, spreadRow);
     }
