@@ -17,12 +17,12 @@ public class UniLauncher
 
     public static void init()
     {
-        FileLoader.createDir(getProgramPath2() + "/bin/output/spreads");
+        FileLoader.createDir(FileLoader.getProgramPath2() + "/bin/output/spreads");
 
         CSVLoader csvLoader = new CSVLoader();
 
         // your directory
-        File f = new File(getProgramPath2() + "/bin/output/spreads/");
+        File f = new File(FileLoader.getProgramPath2() + "/bin/output/spreads/");
         for (String spreadName : Objects.requireNonNull(f.list((dir, name) -> name.endsWith("csv"))))
         {
             StockSpreads.loadSpread(String.valueOf(spreadName.split(".csv")[0]));
@@ -39,13 +39,6 @@ public class UniLauncher
         System.out.println("[Hub] > Welcome to the Hub. Please enter the number corresponding to the desired action");
 
         Hub.menu();
-    }
-
-    public static String getProgramPath2()
-    {
-        URL url = UniLauncher.class.getProtectionDomain().getCodeSource().getLocation();
-        String jarPath = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8);
-        return new File(jarPath).getParentFile().getPath();
     }
 
 }

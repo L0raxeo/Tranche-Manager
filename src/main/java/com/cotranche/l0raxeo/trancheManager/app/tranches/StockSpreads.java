@@ -2,6 +2,7 @@ package com.cotranche.l0raxeo.trancheManager.app.tranches;
 
 import com.cotranche.l0raxeo.trancheManager.app.tranches.modules.Stock;
 import com.cotranche.l0raxeo.trancheManager.utils.CSVLoader;
+import com.cotranche.l0raxeo.trancheManager.utils.FileLoader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -51,7 +52,7 @@ public class StockSpreads
     public static void loadSpread(String spreadName)
     {
         List<String[]> spreadRow = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("bin/output/spreads/" + spreadName + ".csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(FileLoader.getProgramPath2() + "/bin/output/spreads/" + spreadName + ".csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -68,7 +69,7 @@ public class StockSpreads
     {
         List<String[]> queuedSpread = spreads.get(spreadName);
         try {
-            CSVLoader.csvLoader.givenDataArray_whenConvertToCSV_thenOutputCreated("bin/output/spreads/" + spreadName + ".csv", queuedSpread);
+            CSVLoader.csvLoader.givenDataArray_whenConvertToCSV_thenOutputCreated(FileLoader.getProgramPath2() + "/bin/output/spreads/" + spreadName + ".csv", queuedSpread);
         } catch (IOException e) {
             e.printStackTrace();
         }

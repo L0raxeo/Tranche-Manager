@@ -1,9 +1,14 @@
 package com.cotranche.l0raxeo.trancheManager.utils;
 
+import com.cotranche.l0raxeo.trancheManager.app.UniLauncher;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -299,6 +304,13 @@ public class FileLoader
         }
 
         return null;
+    }
+
+    public static String getProgramPath2()
+    {
+        URL url = UniLauncher.class.getProtectionDomain().getCodeSource().getLocation();
+        String jarPath = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8);
+        return new File(jarPath).getParentFile().getPath();
     }
 
 }
