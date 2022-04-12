@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Tranche-Manager:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Tranche_Manager_jar</output-path>
+  <artifact type="jar" name="Tranche-ManagerOSx:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tranche_ManagerOSx_jar</output-path>
     <root id="archive" name="Tranche-Manager.jar">
       <element id="module-output" name="Tranche-Manager" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.15/commons-codec-1.15.jar" path-in-jar="/" />

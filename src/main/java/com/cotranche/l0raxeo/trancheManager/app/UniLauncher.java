@@ -29,7 +29,8 @@ public class UniLauncher
         }
     }
 
-    public static void main(String[] args) throws URISyntaxException {
+    public static void main(String[] args)
+    {
         System.out.println("preparing program...");
         init();
 
