@@ -24,7 +24,8 @@ public class CSVLoader
                 .collect(Collectors.joining(","));
     }
 
-    public void givenDataArray_whenConvertToCSV_thenOutputCreated(String pathName, List<String[]> dataLines) throws IOException {
+    public void givenDataArray_whenConvertToCSV_thenOutputCreated(String pathName, List<String[]> dataLines) throws IOException
+    {
         File csvOutputFile = new File(pathName);
         try (PrintWriter pw = new PrintWriter(csvOutputFile))
         {
@@ -34,9 +35,11 @@ public class CSVLoader
         }
     }
 
-    public String escapeSpecialCharacters(String data) {
+    public String escapeSpecialCharacters(String data)
+    {
         String escapedData = data.replaceAll("\\R", " ");
-        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+        if (data.contains(",") || data.contains("\"") || data.contains("'"))
+        {
             data = data.replace("\"", "\"\"");
             escapedData = "\"" + data + "\"";
         }

@@ -33,7 +33,8 @@ public class StockSpreads
                         String.valueOf(stock.getSharePrice()),
                         String.valueOf(stock.getCagr5YoY()),
                         String.valueOf(stock.getYoy1Return()),
-                        String.valueOf(stock.getYoy5Return())});
+                        String.valueOf(stock.getYoy5Return()),
+                        String.valueOf(stock.getExpenseRatio())});
 
                 break;
             }
@@ -44,7 +45,7 @@ public class StockSpreads
     {
         // add expense ratio and dividend yield
         List<String[]> spreadRow = new ArrayList<>();
-        spreadRow.add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return"});
+        spreadRow.add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return", "Div-Yield", "Expense-ratio"});
 
         spreads.put(spreadName, spreadRow);
     }

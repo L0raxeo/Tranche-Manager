@@ -17,6 +17,8 @@ public class Stock
     private double cagr5YoY;
     private double trailing1YPrice;
     private double trailing5YPrice;
+    private double dividendYield;
+    private double expenseRatio;
     private String type;
 
     public Stock(String tickerSymbol) {
@@ -31,6 +33,12 @@ public class Stock
             sharePrice = Double.parseDouble(String.valueOf(summaryPage.getByXPath("//*[@id=\"quote-header-info\"]/div[3]/div[1]/div[1]/fin-streamer[1]")).split("value=")[1].split("\"")[1]);
             System.out.println("[" + getTickerSymbol() + " Profile] > PPS: " + sharePrice);
             scrapeReturns(client);
+            Object[] historicalDataTable5Y = ((HtmlElement)summaryPage.getByXPath("//*[@id=\"quote-summary\"]/div[2]/table").get(0)).asNormalizedText().lines().toArray();
+
+            for (Object o : historicalDataTable5Y)
+            {
+                System.out.println(o.toString());
+            }
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -63,6 +71,16 @@ public class Stock
         return this.yoy5Return;
     }
 
+    public double getExpenseRatio()
+    {
+        return this.expenseRatio;
+    }
+
+    public double getDividendYield()
+    {
+        return this.dividendYield;
+    }
+
     public double getCagr5YoY() {
         return this.cagr5YoY;
     }
@@ -91,6 +109,16 @@ public class Stock
     public void setTrailing5YPrice(final double price)
     {
         this.trailing5YPrice = price;
+    }
+
+    public void setExpenseRatio(final double ratio)
+    {
+        this.expenseRatio = ratio;
+    }
+
+    public void setDividendYield(final double yield)
+    {
+        this.dividendYield = yield;
     }
 
     private void scrapeReturns(final WebClient client) throws IOException {
