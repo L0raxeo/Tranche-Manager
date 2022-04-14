@@ -240,6 +240,7 @@ public class Actions
         System.out.println("[Spread Manager] > (2) Export Spread");
         System.out.println("[Spread Manager] > (3) Delete Spread");
         System.out.println("[Spread Manager] > (4) Update Spread");
+        System.out.println("[Spread Manager] > (5) Delete Profile From Spread");
 
         System.out.println();
         System.out.println("[Spread Manager] > (-1) reveal all loaded spreads");
@@ -294,6 +295,14 @@ public class Actions
                 }
 
                 System.out.println("[Spread Manager] > successfully updated spread");
+            }
+            case 5 -> {
+                System.out.println("[Spread Manager] > enter spread name");
+                String spreadName = userInput.next();
+                System.out.println("[Spread Manager] > enter ticker of profile being removed");
+                String profileTicker = userInput.next();
+                StockSpreads.deleteProfileFromSpread(spreadName, profileTicker);
+                System.out.println("[Spread Manager] > successfully deleted " + profileTicker + " profile from " + spreadName);
             }
         }
 

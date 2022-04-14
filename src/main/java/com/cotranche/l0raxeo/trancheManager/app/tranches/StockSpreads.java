@@ -112,6 +112,24 @@ public class StockSpreads
         }
     }
 
+    public static void deleteProfileFromSpread(String spreadName, String ticker)
+    {
+        List<String[]> spread = spreads.get(spreadName);
+        String[] queuedProfile = new String[0];
+
+        for (String[] profile : spread)
+        {
+            if (profile[0].equalsIgnoreCase(ticker))
+            {
+                queuedProfile = profile;
+                
+                break;
+            }
+        }
+        
+        spread.remove(queuedProfile);
+    }
+
     public static void deleteSpread(String spreadName)
     {
         FileLoader.loadFile(FileLoader.getProgramPath2() + "/bin/output/spreads/" + spreadName + ".csv").deleteOnExit();
