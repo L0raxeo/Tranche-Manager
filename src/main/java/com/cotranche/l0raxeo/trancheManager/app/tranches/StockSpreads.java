@@ -35,10 +35,10 @@ public class StockSpreads
                         String.valueOf(stock.getCagr5YoY()),
                         String.valueOf(stock.getYoy1Return()),
                         String.valueOf(stock.getYoy5Return()),
+                        String.valueOf(stock.getPeTtm()),
                         String.valueOf(stock.getDividendYield()),
                         String.valueOf(stock.getExpenseRatio()),
                         String.valueOf(stock.getMarketCap()),
-                        String.valueOf(stock.getPeTtm()),
                         String.valueOf(stock.getEpsTtm())});
 
                 break;
@@ -63,7 +63,7 @@ public class StockSpreads
     public static void removeAllProfiles(String spreadName)
     {
         spreads.get(spreadName).clear();
-        spreads.get(spreadName).add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return", "Div-Yield", "Expense-ratio", "Market Cap", "P/E Ratio (TTM)", "EPS (TTM)"});
+        spreads.get(spreadName).add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return", "P/E Ratio (TTM)", "Div-Yield", "Expense-ratio", "Market Cap", "EPS (TTM)"});
 
     }
 
@@ -81,7 +81,7 @@ public class StockSpreads
     {
         // add expense ratio and dividend yield
         List<String[]> spreadRow = new ArrayList<>();
-        spreadRow.add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return", "Div-Yield", "Expense-ratio", "Market Cap", "P/E Ratio (TTM)", "EPS (TTM)"});
+        spreadRow.add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return", "P/E Ratio (TTM)", "Div-Yield", "Expense-ratio", "Market Cap", "EPS (TTM)"});
 
         spreads.put(spreadName, spreadRow);
     }
