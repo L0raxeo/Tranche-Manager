@@ -89,7 +89,7 @@ public class StockSpreads
     public static void loadSpread(String spreadName)
     {
         List<String[]> spreadRow = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(FileLoader.getProgramPath2() + "/bin/output/spreads/" + spreadName + ".csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(FileLoader.getProgramPath2() + "/spreads/" + spreadName + ".csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -106,7 +106,7 @@ public class StockSpreads
     {
         List<String[]> queuedSpread = spreads.get(spreadName);
         try {
-            CSVLoader.csvLoader.givenDataArray_whenConvertToCSV_thenOutputCreated(FileLoader.getProgramPath2() + "/bin/output/spreads/" + spreadName + ".csv", queuedSpread);
+            CSVLoader.csvLoader.givenDataArray_whenConvertToCSV_thenOutputCreated(FileLoader.getProgramPath2() + "/spreads/" + spreadName + ".csv", queuedSpread);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,7 +132,7 @@ public class StockSpreads
 
     public static void deleteSpread(String spreadName)
     {
-        FileLoader.loadFile(FileLoader.getProgramPath2() + "/bin/output/spreads/" + spreadName + ".csv").deleteOnExit();
+        FileLoader.loadFile(FileLoader.getProgramPath2() + "/spreads/" + spreadName + ".csv").deleteOnExit();
     }
 
     public static List<String> getSpreadsByName()

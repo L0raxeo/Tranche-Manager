@@ -18,14 +18,14 @@ public class UniLauncher
     public static void init()
     {
         System.out.println("initialize project structure...");
-        FileLoader.createDir(FileLoader.getProgramPath2() + "/bin/output/spreads");
+        FileLoader.createDir(FileLoader.getProgramPath2() + "/spreads");
 
         System.out.println("initializing CSV Loader...");
         CSVLoader csvLoader = new CSVLoader();
 
         // your directory
 
-        File f = new File(FileLoader.getProgramPath2() + "/bin/output/spreads/");
+        File f = new File(FileLoader.getProgramPath2() + "/spreads/");
         System.out.println("loading all spreadsheets in directory path: " + f.getPath());
         for (String spreadName : Objects.requireNonNull(f.list((dir, name) -> name.endsWith("csv"))))
         {
