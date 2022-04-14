@@ -31,10 +31,10 @@ public class StockSpreads
             {
                 List<String[]> spreadRows = spreads.get(spread);
                 spreadRows.add(new String[] {stock.getTickerSymbol(),
-                        String.valueOf(stock.getSharePrice()),
-                        String.valueOf(stock.getCagr5YoY()),
-                        String.valueOf(stock.getYoy1Return()),
-                        String.valueOf(stock.getYoy5Return()),
+                        "$" + stock.getSharePrice(),
+                        stock.getCagr5YoY() + "%",
+                        stock.getYoy1Return() + "%",
+                        stock.getYoy5Return() + "%",
                         String.valueOf(stock.getPeTtm()),
                         String.valueOf(stock.getDividendYield()),
                         String.valueOf(stock.getExpenseRatio()),

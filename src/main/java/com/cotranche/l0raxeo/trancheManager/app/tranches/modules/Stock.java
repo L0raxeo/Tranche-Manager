@@ -191,12 +191,12 @@ public class Stock
         System.out.println("[" + getTickerSymbol() + " Profile] Trailing 1 Year Price: " + trailing1YPrice);
         trailing5YPrice = Double.parseDouble(historicalDataTable5Y[historicalDataTable5Y.length - 2].toString().split("\t")[1].replaceAll(",", ""));
         System.out.println("[" + getTickerSymbol() + " Profile] Trailing 5 Year Price: " + trailing5YPrice);
-        yoy1Return = (sharePrice - trailing1YPrice) / trailing1YPrice;
-        System.out.println("[" + getTickerSymbol() + " Profile] 1 Year Return: " + yoy1Return * 100 + "%");
-        yoy5Return = (sharePrice - trailing5YPrice) / trailing5YPrice;
-        System.out.println("[" + getTickerSymbol() + " Profile] 5 Year Return: " + yoy5Return * 100 + "%");
-        cagr5YoY = Math.pow(sharePrice / trailing5YPrice, 0.2) - 1.0;
-        System.out.println("[" + getTickerSymbol() + " Profile] Compound Annual Growth Rate (5 Years): " + cagr5YoY * 100 + "%");
+        yoy1Return = Math.round(((sharePrice - trailing1YPrice) / trailing1YPrice) * 100);
+        System.out.println("[" + getTickerSymbol() + " Profile] 1 Year Return: " + yoy1Return + "%");
+        yoy5Return = Math.round(((sharePrice - trailing5YPrice) / trailing5YPrice) * 100);
+        System.out.println("[" + getTickerSymbol() + " Profile] 5 Year Return: " + yoy5Return + "%");
+        cagr5YoY = Math.round((Math.pow(sharePrice / trailing5YPrice, 0.2) - 1.0) * 100);
+        System.out.println("[" + getTickerSymbol() + " Profile] Compound Annual Growth Rate (5 Years): " + cagr5YoY + "%");
     }
 
 }
