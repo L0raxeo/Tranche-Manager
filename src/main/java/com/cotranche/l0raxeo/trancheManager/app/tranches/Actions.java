@@ -329,6 +329,7 @@ public class Actions
                 if (userInput.hasNext())
                     Hub.menu();
             }
+            default -> Hub.menu();
         }
 
         Hub.menu();
