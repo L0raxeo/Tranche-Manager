@@ -7,7 +7,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Scanner;
+import java.util.*;
+import java.util.List;
 
 public class Actions
 {
@@ -237,6 +238,8 @@ public class Actions
         System.out.println("[Spread Manager] > (0) Create Spread");
         System.out.println("[Spread Manager] > (1) Load Spread");
         System.out.println("[Spread Manager] > (2) Export Spread");
+        System.out.println("[Spread Manager] > (3) Delete Spread");
+        System.out.println("[Spread Manager] > (4) Update Spread");
 
         System.out.println();
         System.out.println("[Spread Manager] > (-1) reveal all loaded spreads");
@@ -262,6 +265,35 @@ public class Actions
                 System.out.println("[Spread Manager] > enter spread name");
                 StockSpreads.exportSpread(userInput.next());
                 System.out.println("[Spread Manager] > successfully exported spread");
+            }
+            case 3 -> {
+                System.out.println("[Spread Manager] > enter spread name");
+                StockSpreads.deleteSpread(userInput.next());
+                System.out.println("[Spread Manager] > successfully deleted spread");
+            }
+            case 4 -> {
+                System.out.println("[Spread Manager] > enter spread name");
+
+                List<String> tickers = new ArrayList<>();
+                String spreadName = userInput.next();
+
+                // create list of tickers, delete and recreate entire spread.csv
+                for (String[] profile : StockSpreads.getSpreadProfiles(spreadName))
+                {
+                    tickers.add(profile[0]);
+                }
+
+                StockSpreads.removeAllProfiles(spreadName);
+
+                for (String ticker : tickers)
+                {
+                    if (ticker.equals("Ticker Symbol"))
+                        continue;
+
+                    StockSpreads.addProfile(spreadName, new Stock(ticker));
+                }
+
+                System.out.println("[Spread Manager] > successfully updated spread");
             }
         }
 

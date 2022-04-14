@@ -17,8 +17,11 @@ public class Stock
     private double cagr5YoY;
     private double trailing1YPrice;
     private double trailing5YPrice;
-    private double dividendYield;
-    private double expenseRatio;
+    private String dividendYield = "0%";
+    private String expenseRatio = "N/A";
+    private String peTtm;
+    private String marketCap = "N/A";
+    private double epsTtm;
     private String type;
 
     public Stock(String tickerSymbol) {
@@ -34,10 +37,32 @@ public class Stock
             System.out.println("[" + getTickerSymbol() + " Profile] > PPS: " + sharePrice);
             scrapeReturns(client);
             Object[] historicalDataTable5Y = ((HtmlElement)summaryPage.getByXPath("//*[@id=\"quote-summary\"]/div[2]/table").get(0)).asNormalizedText().lines().toArray();
-
             for (Object o : historicalDataTable5Y)
             {
-                System.out.println(o.toString());
+                String[] splitDataLine = o.toString().split("\t");
+
+                switch (splitDataLine[0]) {
+                    case "Market Cap" -> {
+                        marketCap = splitDataLine[1];
+                        System.out.println("[" + getTickerSymbol() + " Profile] > Market Cap: " + getMarketCap());
+                    }
+                    case "PE Ratio (TTM)" -> {
+                        peTtm = splitDataLine[1];
+                        System.out.println("[" + getTickerSymbol() + " Profile] > PE Ratio (TTM): " + getPeTtm());
+                    }
+                    case "EPS (TTM)" -> {
+                        epsTtm = Double.parseDouble(splitDataLine[1].replaceAll(",", ""));
+                        System.out.println("[" + getTickerSymbol() + " Profile] > EPS (TTM): " + getEpsTtm());
+                    }
+                    case "Expense Ratio (net)" -> {
+                        expenseRatio = splitDataLine[1];
+                        System.out.println("[" + getTickerSymbol() + " Profile] > Expense Ratio (net): " + getExpenseRatio());
+                    }
+                    case "Yield" -> {
+                        dividendYield = splitDataLine[1];
+                        System.out.println("[" + getTickerSymbol() + " Profile] > Dividend Yield: " + getDividendYield());
+                    }
+                }
             }
         }
         catch (IOException e) {
@@ -71,18 +96,33 @@ public class Stock
         return this.yoy5Return;
     }
 
-    public double getExpenseRatio()
+    public String getExpenseRatio()
     {
         return this.expenseRatio;
     }
 
-    public double getDividendYield()
+    public String getDividendYield()
     {
         return this.dividendYield;
     }
 
     public double getCagr5YoY() {
         return this.cagr5YoY;
+    }
+
+    public String getMarketCap()
+    {
+        return marketCap;
+    }
+
+    public String getPeTtm()
+    {
+        return peTtm;
+    }
+
+    public double getEpsTtm()
+    {
+        return epsTtm;
     }
 
     public void setUrl(final String url) {
@@ -111,14 +151,29 @@ public class Stock
         this.trailing5YPrice = price;
     }
 
-    public void setExpenseRatio(final double ratio)
+    public void setExpenseRatio(final String ratio)
     {
         this.expenseRatio = ratio;
     }
 
-    public void setDividendYield(final double yield)
+    public void setDividendYield(final String yield)
     {
         this.dividendYield = yield;
+    }
+
+    public void setMarketCap(final String cap)
+    {
+        this.marketCap = cap;
+    }
+
+    public void setEpsTtm(final double eps)
+    {
+        this.epsTtm = eps;
+    }
+
+    public void setPeTtm(final String ratio)
+    {
+        this.peTtm = ratio;
     }
 
     private void scrapeReturns(final WebClient client) throws IOException {
@@ -132,9 +187,9 @@ public class Stock
         HtmlPage historicalDataPage1Y = client.getPage("https://finance.yahoo.com/quote/" + getTickerSymbol() + "/history?period1=" + lastYear.getTime() / 1000L + "&period2=" + System.currentTimeMillis() / 1000L + "&interval=1mo&filter=history&frequency=1mo&includeAdjustedClose=true");
         Object[] historicalDataTable1Y = ((HtmlElement) historicalDataPage1Y.getByXPath("//*[@id=\"Col1-1-HistoricalDataTable-Proxy\"]/section/div[2]/table").get(0)).asNormalizedText().lines().toArray();
 
-        trailing1YPrice= Double.parseDouble(historicalDataTable1Y[historicalDataTable1Y.length - 2].toString().split("\t")[1]);
+        trailing1YPrice = Double.parseDouble(historicalDataTable1Y[historicalDataTable1Y.length - 2].toString().split("\t")[1].replaceAll(",", ""));
         System.out.println("[" + getTickerSymbol() + " Profile] Trailing 1 Year Price: " + trailing1YPrice);
-        trailing5YPrice= Double.parseDouble(historicalDataTable5Y[historicalDataTable5Y.length - 2].toString().split("\t")[1]);
+        trailing5YPrice = Double.parseDouble(historicalDataTable5Y[historicalDataTable5Y.length - 2].toString().split("\t")[1].replaceAll(",", ""));
         System.out.println("[" + getTickerSymbol() + " Profile] Trailing 5 Year Price: " + trailing5YPrice);
         yoy1Return = (sharePrice - trailing1YPrice) / trailing1YPrice;
         System.out.println("[" + getTickerSymbol() + " Profile] 1 Year Return: " + yoy1Return * 100 + "%");

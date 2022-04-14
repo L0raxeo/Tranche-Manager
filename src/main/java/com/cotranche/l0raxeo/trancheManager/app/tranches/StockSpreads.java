@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class StockSpreads
 {
@@ -34,18 +35,53 @@ public class StockSpreads
                         String.valueOf(stock.getCagr5YoY()),
                         String.valueOf(stock.getYoy1Return()),
                         String.valueOf(stock.getYoy5Return()),
-                        String.valueOf(stock.getExpenseRatio())});
+                        String.valueOf(stock.getDividendYield()),
+                        String.valueOf(stock.getExpenseRatio()),
+                        String.valueOf(stock.getMarketCap()),
+                        String.valueOf(stock.getPeTtm()),
+                        String.valueOf(stock.getEpsTtm())});
 
                 break;
             }
         }
     }
 
+    public static void removeProfile(String spreadName, String stockTicker)
+    {
+        List<String[]> profiles = spreads.get(spreadName);
+
+        for (String[] profile : profiles)
+        {
+            if (Objects.equals(profile[0], stockTicker))
+            {
+                profiles.remove(profile);
+                break;
+            }
+        }
+    }
+
+    public static void removeAllProfiles(String spreadName)
+    {
+        spreads.get(spreadName).clear();
+        spreads.get(spreadName).add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return", "Div-Yield", "Expense-ratio", "Market Cap", "P/E Ratio (TTM)", "EPS (TTM)"});
+
+    }
+
+    public static List<String[]> getSpreadProfiles(String spreadName)
+    {
+        return spreads.get(spreadName);
+    }
+
+    public static List<String[]> getSpread(String spreadName)
+    {
+        return spreads.get(spreadName);
+    }
+
     public static void createSpread(String spreadName)
     {
         // add expense ratio and dividend yield
         List<String[]> spreadRow = new ArrayList<>();
-        spreadRow.add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return", "Div-Yield", "Expense-ratio"});
+        spreadRow.add(new String[] {"Ticker Symbol", "PPS", "CAGR", "1 Year Return", "5 Year Return", "Div-Yield", "Expense-ratio", "Market Cap", "P/E Ratio (TTM)", "EPS (TTM)"});
 
         spreads.put(spreadName, spreadRow);
     }
@@ -74,6 +110,11 @@ public class StockSpreads
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void deleteSpread(String spreadName)
+    {
+        FileLoader.loadFile(FileLoader.getProgramPath2() + "/bin/output/spreads/" + spreadName + ".csv").deleteOnExit();
     }
 
     public static List<String> getSpreadsByName()
