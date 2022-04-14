@@ -241,6 +241,7 @@ public class Actions
         System.out.println("[Spread Manager] > (3) Delete Spread");
         System.out.println("[Spread Manager] > (4) Update Spread");
         System.out.println("[Spread Manager] > (5) Delete Profile From Spread");
+        System.out.println("[Spread Manager] > (6) List Profiles From Spread");
 
         System.out.println();
         System.out.println("[Spread Manager] > (-1) reveal all loaded spreads");
@@ -303,6 +304,22 @@ public class Actions
                 String profileTicker = userInput.next();
                 StockSpreads.deleteProfileFromSpread(spreadName, profileTicker);
                 System.out.println("[Spread Manager] > successfully deleted " + profileTicker + " profile from " + spreadName);
+            }
+            case 6 -> {
+                System.out.println("[Spread Manager] > enter spread name");
+                String spreadName = userInput.next();
+
+                for (String[] profile : StockSpreads.getSpreadProfiles(spreadName))
+                {
+                    if (profile[0].equalsIgnoreCase("Ticker Symbol"))
+                        continue;
+
+                    System.out.println("[" + spreadName + "] > " + profile[0]);
+                }
+
+                System.out.println("[Spread Manager] > enter any key to return to hub");
+                if (userInput.hasNext())
+                    Hub.menu();
             }
         }
 
