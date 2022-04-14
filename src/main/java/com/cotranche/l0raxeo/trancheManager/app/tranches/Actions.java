@@ -300,6 +300,14 @@ public class Actions
             case 5 -> {
                 System.out.println("[Spread Manager] > enter spread name");
                 String spreadName = userInput.next();
+                System.out.println("All Profiles in " + spreadName);
+                for (String[] profile : StockSpreads.getSpreadProfiles(spreadName))
+                {
+                    if (profile[0].equalsIgnoreCase("Ticker Symbol"))
+                        continue;
+
+                    System.out.println(profile[0]);
+                }
                 System.out.println("[Spread Manager] > enter ticker of profile being removed");
                 String profileTicker = userInput.next();
                 StockSpreads.deleteProfileFromSpread(spreadName, profileTicker);
