@@ -326,7 +326,7 @@ public class Actions
                 }
 
                 System.out.println("[Spread Manager] > enter any key to return to hub");
-                if (userInput.hasNext())
+                if (!Objects.equals(userInput.next(), ""))
                     Hub.menu();
             }
             default -> Hub.menu();
